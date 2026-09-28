@@ -64,3 +64,81 @@ return res
    next(error);
     }
 };
+
+
+export const operators = async (req, res, next) => {
+    try {
+ //const products = await ProductModel.find({price:{$gt:10000}});
+ //const products = await ProductModel.find({price:{$gte:10000}});
+ // //const products = await ProductModel.find({price:{$lt:10000}});
+//const products = await ProductModel.find({price:{$lte:2000}});
+//const products = await ProductModel.find({category:{$in:["Electronics","clothing","Footwear"]}});
+// const products = await ProductModel.find({category:{$nin:["Electronics","clothing",]}});
+
+
+// and operators
+
+// const products = await ProductModel.find({
+//      $and: [
+//      {price:{$gt:1000} },
+
+//      {category:{$in:["clothing","Footwear"]} } ,
+
+//      {stock:{$lt: 100 }}
+
+//     ],
+
+//     });
+
+
+// const products =  await ProductModel.find({
+
+//     price: {$not:{$gt:1000 }},
+// });
+   
+
+
+//  not operators
+
+// const products =  await ProductModel.find({
+//     price: {$not:{$gt:1000 }},   
+// },
+// { name:1,price:1},
+// );
+   
+
+
+// projection
+// const products =  await ProductModel.find({
+
+//     price: {$not:{$gt:1000 }},   
+// },
+
+// { name: 1, price: 1, _id: 0},
+
+// );
+
+
+// sorting
+const products =  await ProductModel.find({
+
+    price: {$not:{$gt:2000 }},   
+},
+
+{ name: 1, price: 1, _id: 0 ,stock:1},
+
+) .sort({stock: -1 } );
+
+
+
+
+        return res.status(200).json({ products });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+
+

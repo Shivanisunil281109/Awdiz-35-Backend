@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { createProduct,getAllProduct } from "../controllers/ProductController.js";
+import { createProduct,getAllProduct, operators } from "../controllers/ProductController.js";
 
 
 const productRouter = Router();
@@ -8,6 +8,9 @@ const productRouter = Router();
 productRouter.post('/',createProduct);
 
 productRouter.get('/',(getAllProduct));
+
+
+productRouter.get("/operators",operators)
 
 
 export default productRouter;
