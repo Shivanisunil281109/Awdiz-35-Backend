@@ -119,6 +119,15 @@ export const operators = async (req, res, next) => {
 // );
 
 
+
+// page =1
+// document=10
+// skip=(page-1)*document
+//     = 1-1*10
+//     =0
+
+
+
 // sorting
 const products =  await ProductModel.find({
 
@@ -127,7 +136,7 @@ const products =  await ProductModel.find({
 
 { name: 1, price: 1, _id: 0 ,stock:1},
 
-) .sort({stock: -1 } );
+) .sort({stock: 1 }).limit(10).skip(skip)
 
 
 
