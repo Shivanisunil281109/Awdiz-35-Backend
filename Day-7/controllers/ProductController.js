@@ -49,6 +49,7 @@ export const getAllProduct =async(req,res,next)=>{
     try{
 // throw new Error("Database connection failed");
 
+console.log("Product model readyState:", ProductModel.db.readyState);
 
 const allProducts = await ProductModel.find();
 
@@ -150,4 +151,72 @@ const products =  await ProductModel.find({
 
 
 
+export const aggregationPipeline = async(rq,res,next)=>{
 
+try{
+
+    const result = await ProductModel.aggregate([
+
+//    {$match:{category:"clothing"} },
+
+    //   {$match:{"category": {$in:["Footwear","clothing","Electronics"]} } },
+
+    {$match:{price:{$gt:100} } },
+
+
+
+//     {$group:{
+//         _id:'$name',
+//         totalPrice:{$sum :{ $multiply: ["$price", "$stock"] }
+
+//         }
+//     }
+//    }
+
+
+
+
+
+      {$group:{
+
+        _id:"$category",
+        totalProduct:  {
+        $sum:1,
+        },
+
+       totalStock:{$sum:"$stock"},
+
+       totalPrice:{$sum:{$multiply:["$price","$stock"] },
+
+      },
+
+      CategoryWiseAvgPrice:{$avg:"$price"},
+
+
+      minimumPrice:{$min:"$price"},
+
+
+    maximumPrice:{$max:"$price"},
+
+    extra:{ $sum:"$price"},
+
+    },
+
+},
+
+{$sort:{totalPrice: 1}},
+
+{$project: {extra: 0 }} ,
+
+    ]);
+
+return res.json(result)
+
+
+}catch(error){
+
+  next(error)  
+}
+
+
+}

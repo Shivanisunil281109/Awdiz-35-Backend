@@ -22,12 +22,12 @@ dns.setServers([
 mongoose.connect(process.env.MONGODBURL)
 .then(()=>{
     console.log("Connected to MongoDB");
+   
 })
 
 .catch((error)=>{
-    console.log(error.reason?.servers);
+    console.log("MongoDB connection error:", error);
 });
-
 
 app.get("/",(req,res)=>{
 res.send("Welcome to The API")
