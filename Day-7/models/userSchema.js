@@ -7,8 +7,10 @@ name: String,
 email:String,
 password: String,
 contact:Number,
+role:{type: String,enum: ["user","admin","seller"] , default: "user"}
 
-})
+
+});
 
 
 

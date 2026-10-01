@@ -6,7 +6,7 @@ export const createProduct = async(req,res,next)=>{
 
     try {
 
-const {name,price,stock,img,category} =req.body
+const {name,price,stock,img,category,userId} =req.body
 
 // if(!name){
 
@@ -15,7 +15,7 @@ const {name,price,stock,img,category} =req.body
 // }
 
 
-if(!name || !price  || !stock || !img || !category){
+if(!name || !price  || !stock || !img || !category  ||!userID){
 
     return res.status(400).json({message:"All fields are required"});
 
@@ -29,6 +29,7 @@ const newProduct = new ProductModel({
     stock:stock,
     category:category,
     img:img,
+    sellerID: userId
 })
 
 

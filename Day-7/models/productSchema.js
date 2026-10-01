@@ -9,6 +9,7 @@ const productSchema = new Schema({
     stock:Number,
     category:String,
     img:String,
+    sellerID :{type:Schema.Types.ObjectId,ref:"Users"},
 }
 );
 
